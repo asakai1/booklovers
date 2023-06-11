@@ -1,0 +1,11 @@
+<div>
+  <div>
+    <%= flash[:notice] %>
+    <!--ジャンルの編集-->
+    <%= form_with model: @genre, url: admin_genre_path do |f| %>
+      <h4>ジャンル名</h4>
+      <%= f.text_field :name %>
+      <%= f.submit '更新する' %>
+    <% end %>
+ </div>
+</div>

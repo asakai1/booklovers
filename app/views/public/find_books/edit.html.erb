@@ -1,0 +1,15 @@
+<div>
+  <div>
+    <p>探している書籍の内容を変更します。</p>
+    <p>書籍の写真は投稿できませんので、ご了承ください。</p>
+    <%= form_with model: @find_book, url: update_find_book_path, method: :patch do |f| %>
+      <h4>タイトル</h4>
+      <%= f.text_field :title %>
+      <h4>説明</h4>
+      <%= f.text_area :body %>
+      <h4>ジャンル</h4>
+      <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+      <%= f.submit '変更を更新する' %>
+    <% end %>
+  </div>
+</div>

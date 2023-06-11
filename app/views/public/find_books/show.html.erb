@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <table>
+      <tbody>
+        <tr>
+          <td><%= @find_book.title %></td>
+          <td><%= link_to "お気に入りに追加" %></td>
+        </tr>
+        <tr>
+          <td><%= @find_book.body %></td>
+        </tr>
+        <tr>
+          <td><%= @find_book.genre.name %></td>
+        </tr>
+        <tr>
+          <td><%= @find_book.user.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <% if @find_book.user_id == current_user.id %>
+        <% link_to "編集する", edit_find_book_path(@find_book.id) %>
+        <% link_to "削除する", destroy_find_book_path(@find_book.id), method: :patch, alert: "投稿を削除しますか？" %>
+      <% end %>
+      <% link_to "出品する" %>
+    </div>
+  </div>
+  <div>
+    <h2>出品一覧</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>出品者</th>
+          <th>出品価格</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

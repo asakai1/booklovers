@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # プロフィール画像用にactivestrageを追加
   has_one_attached :profile_image
 
+  # 探す・おすすめ投稿との関連付け
+  has_many :find_books, dependent: :destroy
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

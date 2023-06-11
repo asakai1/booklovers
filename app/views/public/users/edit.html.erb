@@ -1,6 +1,6 @@
 <h2>会員情報編集</h2>
 
-<%= form_with model: @user,url: update_user_path(current_user.id), method: :patch do |f| %>
+<%= form_with model: @user,url: update_user_path(current_user), method: :patch do |f| %>
 
   <div class="field">
     <%= f.label :'プロフィール画像' %><br />
@@ -28,6 +28,6 @@
   </div>
 
   <div>
-    <%= link_to "アカウントを削除する", destroy_user_path, method: :delete %>
+    <%= link_to "退会する", confirm_withdraw_path %>
   </div>
 <% end %>
