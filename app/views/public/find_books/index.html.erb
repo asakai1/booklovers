@@ -6,7 +6,7 @@
       <div>
         <% @find_books.each do |find_book| %>
           <div><%= link_to find_book.title, find_book_path(find_book.id) %></div>
-          <div><%= find_book.body %></div>
+          <div><%= find_book.description %></div>
           <div><%= find_book.genre.name %></div>
           <div><%= find_book.user.name %></div>
         <% end %>

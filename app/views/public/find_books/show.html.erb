@@ -7,7 +7,7 @@
           <td><%= link_to "お気に入りに追加" %></td>
         </tr>
         <tr>
-          <td><%= @find_book.body %></td>
+          <td><%= @find_book.description %></td>
         </tr>
         <tr>
           <td><%= @find_book.genre.name %></td>
@@ -18,11 +18,11 @@
       </tbody>
     </table>
     <div>
-      <% if @find_book.user_id == current_user.id %>
-        <% link_to "編集する", edit_find_book_path(@find_book.id) %>
-        <% link_to "削除する", destroy_find_book_path(@find_book.id), method: :patch, alert: "投稿を削除しますか？" %>
+      <% if @user == current_user %>
+        <%= link_to "編集する", edit_find_book_path(@find_book.id) %>
+        <%= link_to "削除する", destroy_find_book_path(@find_book.id), method: :patch, alert: "投稿を削除しますか？" %>
       <% end %>
-      <% link_to "出品する" %>
+      <%= link_to "出品する" %>
     </div>
   </div>
   <div>

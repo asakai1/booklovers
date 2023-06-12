@@ -1,1 +1,15 @@
 <%= flash[:notice] %>
+<div>
+  <div>
+    <h2>新規探す投稿</h2>
+    <%= link_to "一覧はこちら", find_books_path %>
+    <% @find_books.each do |find_book| %>
+      <div>
+        <%=link_to find_book.title, find_book_path(find_book.id) %>
+        <%= find_book.description %>
+        <%= find_book.genre.name %>
+        <%= find_book.user.name %>
+      </div>
+    <% end %>
+  </div>
+</div>

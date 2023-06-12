@@ -1,0 +1,44 @@
+<div>
+  <div>
+    <h2><%= user.name %>さんのページ</h2>
+    <div>
+      <%= image_tag user.get_profile_image(100,100) %>
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <th>紹介文</th>
+          <td><%= user.introduction %></td>
+        </tr>
+        <% if user == current_user %>
+        <tr>
+          <th>会員名</th>
+          <td><%= user.name %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= user.email %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= link_to "編集する", edit_user_path(user.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div>
+    <h2>投稿一覧</h2>
+    <% find_books.each do |find_book| %>
+      <div>
+        <%= find_book.title %>
+        <%= find_book.description %>
+        <%= find_book.genre.name %>
+        <% if user == current_user %>
+          <%= link_to "編集する", edit_find_book_path(find_book.id) %>
+        <% end %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

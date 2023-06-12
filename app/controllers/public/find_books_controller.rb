@@ -7,7 +7,7 @@ class Public::FindBooksController < ApplicationController
     @find_book = FindBook.new(find_book_params)
     @find_book.user_id = current_user.id
     @find_book.save
-    redirect_to find_book_path, notice: "探している書籍の投稿に成功しました。"
+    redirect_to find_book_path(@find_book.id), notice: "探している書籍の投稿に成功しました。"
   end
 
   def index
@@ -16,12 +16,17 @@ class Public::FindBooksController < ApplicationController
 
   def show
     @find_book = FindBook.find(params[:id])
+    @user = @find_book.user
   end
 
   def edit
-    @find_book = FindBook.find(find_book_params)
-    @find_book.save
-    redirect_to find_books_path, notice: "探している書籍の投稿を更新に成功しました。"
+    @find_book = FindBook.find(params[:id])
+  end
+
+  def update
+    @find_book = FindBook.find(params[:id])
+    @find_book.update(find_book_params)
+    redirect_to find_book_path(@find_book.id), notice: "探している書籍の投稿を更新に成功しました。"
   end
 
   def destroy
@@ -33,6 +38,6 @@ class Public::FindBooksController < ApplicationController
   private
 
   def find_book_params
-    params.require(:find_book).permit(%i[user_id genre_id title body])
+    params.require(:find_book).permit(%i[user_id genre_id title description])
   end
 end

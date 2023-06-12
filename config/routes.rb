@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
+
     # 会員情報更新
     patch 'users/:id' => 'users#update', as: 'update_user'
     # 退会確認
@@ -16,10 +17,18 @@ Rails.application.routes.draw do
     # 退会処理（退会フラグの切替）
     patch 'users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
     resources :users, only: %i[show edit]
-    # 探す投稿
+
+    # 探す投稿の削除（削除フラグの切替）
     patch 'find_books/:id/destroy' => 'find_books#destroy', as: 'destroy_find_book'
+    # 探す投稿の編集、prefix設定のためresourcesから外しました
     patch 'find_books/:id' => 'find_books#update', as: 'update_find_book'
     resources :find_books, only: %i[new create index show edit update]
+
+    # おすすめ投稿の削除（削除フラグの切替）
+    patch 'suggest_books/:id/destroy' => 'suggest_books#destroy', as: 'destroy_suggest_book'
+    # おすすめ投稿の編集、prefix設定のためresourcesから外しました
+    patch 'suggest_books/:id' => 'suggest_books#update', as: 'update_suggest_book'
+    resources :suggest_books, only: %i[new create index show edit update]
   end
 
   # ゲストログイン用のルーティング
