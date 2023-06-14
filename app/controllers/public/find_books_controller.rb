@@ -26,13 +26,13 @@ class Public::FindBooksController < ApplicationController
   def update
     @find_book = FindBook.find(params[:id])
     @find_book.update(find_book_params)
-    redirect_to find_book_path(@find_book.id), notice: "探している書籍の投稿を更新に成功しました。"
+    redirect_to find_book_path(@find_book.id), notice: "お探しの書籍の投稿を更新に成功しました。"
   end
 
   def destroy
     @find_book = FindBook.find(find_book_params)
     @find_book.update(is_deleted: true)
-    redirect_to find_books_path, notice: "探している書籍の投稿を削除しました。"
+    redirect_to find_books_path, notice: "お探しの書籍の投稿を削除しました。"
   end
 
   private

@@ -1,2 +1,15 @@
-<h1>Public::SuggestBooks#index</h1>
-<p>Find me in app/views/public/suggest_books/index.html.erb</p>
+<div>
+  <div>
+    <div>
+      <%= link_to "おすすめの書籍を投稿する", new_suggest_book_path %>
+    </div>
+      <div>
+        <% @suggest_books.each do |find_book| %>
+          <div><%= link_to suggest_book.title, suggest_book_path(suggest_book.id) %></div>
+          <div><%= suggest_book.description %></div>
+          <div><%= suggest_book.genre.name %></div>
+          <div><%= suggest_book.user.name %></div>
+        <% end %>
+      </div>
+  </div>
+</div>

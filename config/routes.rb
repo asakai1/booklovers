@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     # おすすめ投稿の編集、prefix設定のためresourcesから外しました
     patch 'suggest_books/:id' => 'suggest_books#update', as: 'update_suggest_book'
     resources :suggest_books, only: %i[new create index show edit update]
+
+    # 複数モデルの検索機能にfinderアクションを使用
+    get 'finder' => 'finders#finder'
   end
 
   # ゲストログイン用のルーティング
@@ -45,6 +48,13 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :genres, only: %i[index create edit update]
+
+    # 会員の削除（削除フラグの切替）
+    patch 'users/:id/destroy' => 'users#destroy', as: 'destroy_user'
+    # 探す投稿の編集、prefix設定のためresourcesから外しました
+    patch 'users/:id' => 'users#update', as: 'update_user'
+    resources :users, only: %i[index show edit update]
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

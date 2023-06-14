@@ -1,2 +1,28 @@
-<h1>Public::SuggestBooks#show</h1>
-<p>Find me in app/views/public/suggest_books/show.html.erb</p>
+<div>
+  <div>
+    <table>
+      <tbody>
+        <tr>
+          <td><%= @suggest_book.title %></td>
+          <td><%= link_to "お気に入りに追加" %></td>
+        </tr>
+        <tr>
+          <td><%= @suggest_book.introduction %></td>
+        </tr>
+        <tr>
+          <td><%= @suggest_book.genre.name %></td>
+        </tr>
+        <tr>
+          <td><%= @suggest_book.user.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <% if @user == current_user %>
+        <%= link_to "編集する", edit_suggest_book_path(@suggest_book.id) %>
+        <%= link_to "削除する", destroy_suggest_book_path(@suggest_book.id), method: :patch, alert: "投稿を削除しますか？" %>
+      <% end %>
+      <%= link_to "コメントする" %>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,15 @@
-<h1>Public::SuggestBooks#edit</h1>
-<p>Find me in app/views/public/suggest_books/edit.html.erb</p>
+<div>
+  <div>
+    <p>おすすめの書籍の内容を変更します。</p>
+    <p>書籍の写真は投稿できません。</p>
+    <%= form_with model: @suggest_book, url: update_suggest_book_path, method: :patch do |f| %>
+      <h4>タイトル</h4>
+      <%= f.text_field :title %>
+      <h4>説明</h4>
+      <%= f.text_area :introduction %>
+      <h4>ジャンル</h4>
+      <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+      <%= f.submit '変更を更新する' %>
+    <% end %>
+  </div>
+</div>
