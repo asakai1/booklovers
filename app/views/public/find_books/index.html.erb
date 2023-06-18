@@ -1,15 +1,16 @@
 <div>
   <div>
     <div>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, find_books_path(genre_name: genre.name) %>
+      <% end %>
+    </div>
+    <div>
       <%= link_to "お探しの書籍を投稿する", new_find_book_path %>
     </div>
-      <div>
-        <% @find_books.each do |find_book| %>
-          <div><%= link_to find_book.title, find_book_path(find_book.id) %></div>
-          <div><%= find_book.description %></div>
-          <div><%= find_book.genre.name %></div>
-          <div><%= find_book.user.name %></div>
-        <% end %>
-      </div>
+    <div>
+      <h2>探す投稿一覧</h2>
+      <%= render 'public/users/index', books: @find_books %>
+    </div>
   </div>
 </div>

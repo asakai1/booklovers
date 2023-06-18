@@ -1,0 +1,54 @@
+<div>
+  <div>
+    <h2><%= @user.name %>さんの詳細</h2>
+    <div>
+      <%= image_tag @user.get_profile_image(100,100) %>
+    </div>
+    <div>
+      <table>
+        <tbody>
+          <tr>
+            <th>会員ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <th>会員名</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th>紹介文</th>
+            <td><%= @user.introduction %></td>
+          </tr>
+          <tr>
+            <th>退会ステータス</th>
+            <td><%= @user.is_deleted ? "退会済み" : "有効" %></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= link_to "編集する", edit_user_path(@user.id) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>探す投稿一覧</h2>
+      <% @find_books.each do |find_book| %>
+        <%= find_book.title %>
+        <%= find_book.description %>
+        <%= find_book.genre.name %>
+      <% end %>
+    </div>
+    <div>
+      <h2>おすすめ投稿一覧</h2>
+      <% @suggest_books.each do |suggest_book| %>
+        <%= suggest_book.title %>
+        <%= suggest_book.introduction %>
+        <%= suggest_book.genre.name %>
+      <% end %>
+    </div>
+  </div>
+</div>

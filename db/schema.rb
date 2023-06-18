@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_133807) do
     t.integer "user_id", null: false
     t.integer "genre_id", null: false
     t.string "title", null: false
-    t.text "description", null: false
+    t.text "body", null: false
     t.string "name"
     t.string "postal_code"
     t.string "address"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_133807) do
     t.integer "user_id", null: false
     t.integer "genre_id", null: false
     t.string "title", null: false
-    t.text "introduction", null: false
+    t.text "body", null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

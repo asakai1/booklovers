@@ -3,7 +3,9 @@ class Public::UsersController < ApplicationController
   # 会員詳細ページ・マイページ
   def show
     @user = User.find(params[:id])
-    @find_books = @user.find_books
+    # 会員の投稿を全て取得
+    @find_books = @user.find_books.all
+    @suggest_books = @user.suggest_books.all
   end
 
   # 会員情報の編集

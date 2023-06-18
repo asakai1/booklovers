@@ -4,7 +4,7 @@ class CreateFindBooks < ActiveRecord::Migration[6.1]
       t.integer :user_id, null: false
       t.integer :genre_id, null: false
       t.string :title, null: false
-      t.text :description, null: false
+      t.text :body, null: false
       t.string :name
       t.string :postal_code
       t.string :address

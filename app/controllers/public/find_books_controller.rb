@@ -12,6 +12,7 @@ class Public::FindBooksController < ApplicationController
 
   def index
     @find_books = FindBook.all
+    @genres = Genre.all
   end
 
   def show
@@ -38,6 +39,6 @@ class Public::FindBooksController < ApplicationController
   private
 
   def find_book_params
-    params.require(:find_book).permit(%i[user_id genre_id title description])
+    params.require(:find_book).permit(%i[user_id genre_id title body])
   end
 end

@@ -1,2 +1,12 @@
 <%= flash[:notice] %>
-<%= "top" %>
+<div>
+  <div>
+    <div>
+      <% @users.each do |user| %>
+        <div><%= link_to user.name, user_path(user.id) %></div>
+        <div><%= user.email %></div>
+        <div><%= user.is_deleted ? "退会済み" : "有効" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
