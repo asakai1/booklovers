@@ -4,12 +4,12 @@
     <div>
       <h2>新着探す投稿</h2>
       <%= link_to "一覧はこちら", find_books_path %>
-      <%= render 'public/users/index', find_books: @find_books %>
+      <%= render 'public/users/index', books: @find_books %>
     </div>
     <div>
       <h2>新規おすすめ投稿</h2>
       <%= link_to "一覧はこちら", suggest_books_path %>
-      <%= render 'public/users/index', suggest_books: @suggest_books %>
+      <%= render 'public/users/index', books: @suggest_books %>
     </div>
   </div>
 </div>

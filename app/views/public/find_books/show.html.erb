@@ -1,48 +1,52 @@
 <div>
   <div>
-    <table>
-      <tbody>
-        <tr>
-          <td><%= @find_book.title %></td>
-          <td><%= link_to "お気に入りに追加" %></td>
-        </tr>
-        <tr>
-          <td><%= @find_book.description %></td>
-        </tr>
-        <tr>
-          <td><%= @find_book.genre.name %></td>
-        </tr>
-        <tr>
-          <td><%= @find_book.user.name %></td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <h2>書籍詳細</h2>
+      <%= render 'public/users/book_page', book: @find_book %>
+    </div>
     <div>
       <% if @user == current_user %>
         <%= link_to "編集する", edit_find_book_path(@find_book.id) %>
         <%= link_to "削除する", destroy_find_book_path(@find_book.id), method: :patch, alert: "投稿を削除しますか？" %>
       <% end %>
       <%= link_to "情報提供" %>
-      <%= link_to "出品する" %>
     </div>
-  </div>
-  <div>
-    <h2>出品一覧</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>出品者</th>
-          <th>出品価格</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <h2>お持ちの書籍を出品する</h2>
+      <%= form_with model: @sell_book do |f| %>
+        <h4>価格</h4>
+        <%= f.text_field :price %>
+        <h4>発送可能日</h4>
+        <%= "購入確定から" %><br />
+        <%= f.text_field :shipping_date %>
+        <%= "日以内" %><br />
+        <%= f.submit "出品する" %>
+      <% end %>
+    </div>
+    <div>
+      <h2>出品一覧</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>出品者</th>
+            <th>出品価格</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sell_books.each do |sell_book| %>
+            <tr>
+              <td><%= sell_book.user.name %></td>
+              <td><%= sell_book.price %></td>
+              <% if sell_book.user == current_user %>
+                <td><%= link_to "削除する" %></td>
+              <% elsif @user == current_user %>
+                <td><%= link_to "購入する" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

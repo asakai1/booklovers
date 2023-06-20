@@ -1,28 +1,15 @@
 <div>
   <div>
-    <table>
-      <tbody>
-        <tr>
-          <td><%= @suggest_book.title %></td>
-          <td><%= link_to "お気に入りに追加" %></td>
-        </tr>
-        <tr>
-          <td><%= @suggest_book.introduction %></td>
-        </tr>
-        <tr>
-          <td><%= @suggest_book.genre.name %></td>
-        </tr>
-        <tr>
-          <td><%= @suggest_book.user.name %></td>
-        </tr>
-      </tbody>
-    </table>
     <div>
-      <% if @user == current_user %>
-        <%= link_to "編集する", edit_suggest_book_path(@suggest_book.id) %>
-        <%= link_to "削除する", destroy_suggest_book_path(@suggest_book.id), method: :patch, alert: "投稿を削除しますか？" %>
+    <%= render 'public/users/book_page', book: @suggest_book, user: @user %>
+    </div>
+    <div>
+      <% if user == current_user %>
+        <%= link_to "編集する", edit_suggest_book_path(book.id) %>
+        <%= link_to "削除する", destroy_suggest_book_path(book.id), method: :patch, alert: "投稿を削除しますか？" %>
       <% end %>
       <%= link_to "コメントする" %>
+      <%= link_to "お気に入りに追加" %>
     </div>
   </div>
 </div>

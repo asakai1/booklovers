@@ -1,9 +1,11 @@
 <div>
   <div>
     <% books.each do |book| %>
-      <%= book.title %>
-      <%= book.body %>
-      <%= book.genre.name %>
+      <div>
+        <%= link_to book.title, book %>
+        <%= book.body %>
+        <%= book.genre.name %>
+      </div>
     <% end %>
   </div>
 </div>

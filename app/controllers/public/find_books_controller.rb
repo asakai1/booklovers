@@ -11,13 +11,21 @@ class Public::FindBooksController < ApplicationController
   end
 
   def index
-    @find_books = FindBook.all
     @genres = Genre.all
+    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books : FindBook.all
   end
 
   def show
     @find_book = FindBook.find(params[:id])
     @user = @find_book.user
+    @sell_book = Sellbook.new
+    @sell_books = @find_book.sell_book.all
+  end
+
+  def sell_book_confirm
+    @sell_book = SellBook.new(sell_book_params)
+    @sell_book.user_id = current_user.id
+    @sell_book.book_id = @sell_book.find_book.id
   end
 
   def edit
@@ -39,6 +47,11 @@ class Public::FindBooksController < ApplicationController
   private
 
   def find_book_params
-    params.require(:find_book).permit(%i[user_id genre_id title body])
+    params.require(:find_book).permit(%i[user_id genre_id title body is_deleted])
   end
+
+  def sell_book_params
+    params.require(:sell_book).permit(%i[book_id user_id price shipping_date is_deleted])
+  end
+
 end

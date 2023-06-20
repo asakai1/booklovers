@@ -2,7 +2,7 @@
   <div>
     <div>
       <% @genres.each do |genre| %>
-        <%= link_to genre.name, find_books_path(genre_name: genre.name) %>
+        <%= link_to genre.name, find_books_path(genre_id: genre.id) %>
       <% end %>
     </div>
     <div>
