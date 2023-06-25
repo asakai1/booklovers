@@ -4,12 +4,13 @@
     <%= render 'public/users/book_page', book: @suggest_book, user: @user %>
     </div>
     <div>
-      <% if user == current_user %>
-        <%= link_to "編集する", edit_suggest_book_path(book.id) %>
-        <%= link_to "削除する", destroy_suggest_book_path(book.id), method: :patch, alert: "投稿を削除しますか？" %>
+      <% if @suggest_book.user == current_user %>
+        <%= link_to "編集する", edit_suggest_book_path(@suggest_book) %>
+        <%= link_to "削除する", destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "本当に削除しますか？"} %>
+      <% else %>
+        <%= link_to "コメントする" %>
+        <%= link_to "お気に入りに追加" %>
       <% end %>
-      <%= link_to "コメントする" %>
-      <%= link_to "お気に入りに追加" %>
     </div>
   </div>
 </div>

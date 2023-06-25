@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_20_124940) do
+ActiveRecord::Schema.define(version: 2023_06_25_084926) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,16 +52,23 @@ ActiveRecord::Schema.define(version: 2023_06_20_124940) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "buy_books", force: :cascade do |t|
+    t.integer "sell_book_id", null: false
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.string "telephone_number", null: false
+    t.integer "payment_method", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "find_books", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.string "name"
-    t.string "postal_code"
-    t.string "address"
-    t.integer "payment_method"
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -74,11 +81,10 @@ ActiveRecord::Schema.define(version: 2023_06_20_124940) do
   end
 
   create_table "sell_books", force: :cascade do |t|
-    t.integer "book_id", null: false
+    t.integer "find_book_id", null: false
     t.integer "user_id", null: false
     t.integer "price", null: false
     t.integer "shipping_date", null: false
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -88,7 +94,6 @@ ActiveRecord::Schema.define(version: 2023_06_20_124940) do
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

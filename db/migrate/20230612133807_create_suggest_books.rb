@@ -5,7 +5,6 @@ class CreateSuggestBooks < ActiveRecord::Migration[6.1]
       t.integer :genre_id, null: false
       t.string :title, null: false
       t.text :body, null: false
-      t.boolean :is_deleted, null: false, default: false
       t.timestamps
     end
   end

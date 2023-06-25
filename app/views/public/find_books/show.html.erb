@@ -5,26 +5,27 @@
       <%= render 'public/users/book_page', book: @find_book %>
     </div>
     <div>
-      <% if @user == current_user %>
-        <%= link_to "編集する", edit_find_book_path(@find_book.id) %>
-        <%= link_to "削除する", destroy_find_book_path(@find_book.id), method: :patch, alert: "投稿を削除しますか？" %>
+      <% if @find_book.user == current_user %>
+        <%= link_to "編集する", edit_find_book_path(@find_book) %>
+        <%= link_to "削除する", destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"} %>
       <% end %>
       <%= link_to "情報提供" %>
     </div>
     <div>
-      <h2>お持ちの書籍を出品する</h2>
+      <h3>お持ちの書籍を出品する</h3>
       <%= form_with model: @sell_book do |f| %>
-        <h4>価格</h4>
+        <p>価格</p>
         <%= f.text_field :price %>
-        <h4>発送可能日</h4>
-        <%= "購入確定から" %><br />
-        <%= f.text_field :shipping_date %>
-        <%= "日以内" %><br />
+        <p>発送可能日</p>
+        <p>購入確定から</p>
+        <p><%= f.text_field :shipping_date %>日以内</p>
+        <%= f.hidden_field :find_book_id, :value => @find_book.id %>
         <%= f.submit "出品する" %>
       <% end %>
     </div>
     <div>
-      <h2>出品一覧</h2>
+      <h3>出品一覧</h3>
+      <p>出品数:<%= @find_book.sell_books.count %></p>
       <table>
         <thead>
           <tr>
@@ -34,13 +35,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @sell_books.each do |sell_book| %>
+          <% @find_book.sell_books.each do |sell_book| %>
             <tr>
               <td><%= sell_book.user.name %></td>
               <td><%= sell_book.price %></td>
+              <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
+              <!--ユーザーが出品者の場合、削除リンクを表示する-->
               <% if sell_book.user == current_user %>
-                <td><%= link_to "削除する" %></td>
-              <% elsif @user == current_user %>
+                <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"} %></td>
+              <!--ユーザーが投稿者の場合、購入リンクを表示する-->
+              <% elsif @find_book.user == current_user %>
                 <td><%= link_to "購入する" %></td>
               <% end %>
             </tr>

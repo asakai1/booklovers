@@ -204,3 +204,8 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+
+  enums:
+    buy_book:
+      payment_method:
+        cash_on_delivery: "代金引換"

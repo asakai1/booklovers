@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :find_books, dependent: :destroy
   has_many :suggest_books, dependent: :destroy
   has_many :sell_books, dependent: :destroy
+  has_many :buy_books, dependent: :destroy
 
   # プロフィール画像用にactivestrageを追加
   has_one_attached :profile_image

@@ -60,3 +60,6 @@ gem 'devise'
 
 # deviseのflashメッセージの日本語化
 gem 'devise-i18n'
+
+# enumの設定のため導入
+gem "enum_help"

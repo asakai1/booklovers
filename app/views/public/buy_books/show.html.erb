@@ -1,0 +1,22 @@
+<div>
+  <div>
+    <h2>購入情報</h2>
+    <p>書籍のタイトル</p>
+    <%= @sell_book.find_book.title %>
+    <p>価格</p>
+    <%= @sell_book.price %>
+    <p>購入確定から<%= @sell_book.shipping_date %>日以内</p>
+
+    <h2>発送先</h2>
+    <p>購入者氏名</p>
+    <%= @sell_book.purchaser_name %>
+    <p>郵便番号</p>
+    <%= @sell_book.postal_code %>
+    <p>住所</p>
+    <%= @sell_book.address %>
+    <p>電話番号</p>
+    <%= @sell_book.telephone_number %>
+    <p>購入確定日</p>
+    <%= @sell_book.updated_at.strftime('%Y/%m/%d') %>
+  </div>
+</div>
