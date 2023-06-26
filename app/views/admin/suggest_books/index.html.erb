@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <div>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, admin_suggest_books_path(genre_id: genre.id) %>
+      <% end %>
+    </div>
+    <div>
+      <h4>おすすめ投稿一覧</h4>
+      <% @suggest_books.each do |suggest_book| %>
+        <div>
+          <%= link_to suggest_book.title, admin_suggest_book_path(suggest_book) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

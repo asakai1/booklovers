@@ -1,2 +1,43 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div>
+  <div>
+    <div>
+      <h2>会員情報編集</h2>
+
+      <%= form_with model: @user,url: admin_update_user_path, method: :patch do |f| %>
+
+        <div class="field">
+          <%= f.label :'プロフィール画像' %><br />
+          <%= f.file_field :profile_image, accept: "image/*" %>
+        </div>
+
+        </div>
+        <div class="field">
+          <%= f.label :"会員名" %><br />
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :"メールアドレス" %><br />
+          <%= f.text_field :email %>
+        </div>
+
+        <div class="field">
+          <%= f.label :"紹介文" %><br />
+          <%= f.text_area :introduction %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "変更を保存する" %>
+        </div>
+
+        <div>
+          <%= f.radio_button :is_deleted, "false" %>
+          <%= f.label :is_deleted_false, "有効" %>
+
+          <%= f.radio_button :is_deleted, "true" %>
+          <%= f.label :is_deleted_true, "無効" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,21 @@
 <div>
   <div>
     <div>
+      <% if @suggest_book.favorited_by?(current_user) %>
+        <p>
+          <%= link_to suggest_book_favorites_path(@suggest_book), method: :delete do %>
+            ★<%= @suggest_book.favorites.count %>人のお気に入り
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to suggest_book_favorites_path(@suggest_book), method: :post do %>
+            ☆<%= @suggest_book.favorites.count %>人のお気に入り
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+    <div>
     <%= render 'public/users/book_page', book: @suggest_book, user: @user %>
     </div>
     <div>
@@ -8,8 +23,24 @@
         <%= link_to "編集する", edit_suggest_book_path(@suggest_book) %>
         <%= link_to "削除する", destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "本当に削除しますか？"} %>
       <% else %>
-        <%= link_to "コメントする" %>
-        <%= link_to "お気に入りに追加" %>
+        <div>
+          <p>コメント<%= @suggest_book.post_comments.count %>件</p>
+          <% @suggest_book.post_comments.each do |post_comment| %>
+            <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+            <%= post_comment.user.name %>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+            <%= post_comment.comment %>
+            <% if post_comment.user == current_user %>
+              <%= link_to "削除する", suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
+        <div>
+          <%= form_with model: [@suggest_book, @post_comment] do |f| %>
+            <%= f.text_area :comment, row: '5', placeholder: "コメントはこちらへ" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

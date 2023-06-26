@@ -29,25 +29,33 @@
           </tr>
           <tr>
             <th></th>
-            <td><%= link_to "編集する", edit_user_path(@user.id) %></td>
+            <td><%= link_to "編集する", edit_admin_user_path(@user.id) %></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div>
-      <h2>探す投稿一覧</h2>
-      <% @find_books.each do |find_book| %>
-        <%= find_book.title %>
-        <%= find_book.description %>
-        <%= find_book.genre.name %>
+      <h4>お気に入り一覧</h4>
+      <% @favorites.each do |favorite| %>
+        <div>
+          <%= link_to favorite.suggest_book.title, admin_suggest_book_path(favorite.suggest_book) %>
+        </div>
       <% end %>
     </div>
     <div>
-      <h2>おすすめ投稿一覧</h2>
-      <% @suggest_books.each do |suggest_book| %>
-        <%= suggest_book.title %>
-        <%= suggest_book.introduction %>
-        <%= suggest_book.genre.name %>
+      <h4>探す投稿一覧</h4>
+      <% @user.find_books.each do |find_book| %>
+        <div>
+          <%= link_to find_book.title, admin_find_book_path(find_book) %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <h4>おすすめ投稿一覧</h4>
+      <% @user.suggest_books.each do |suggest_book| %>
+        <div>
+          <%= link_to suggest_book.title, admin_suggest_book_path(suggest_book) %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -8,8 +8,25 @@
       <% if @find_book.user == current_user %>
         <%= link_to "編集する", edit_find_book_path(@find_book) %>
         <%= link_to "削除する", destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"} %>
-      <% end %>
-      <%= link_to "情報提供" %>
+      <% else %>
+        <div>
+          <p>目撃情報<%= @find_book.post_informations.count %>件</p>
+          <% @find_book.post_informations.each do |post_information| %>
+            <p><%= image_tag post_information.user.get_profile_image(100,100) %></p>
+            <%= post_information.user.name %>
+            <%= post_information.created_at.strftime('%Y/%m/%d') %>
+            <%= post_information.information %>
+            <% if post_information.user == current_user %>
+              <%= link_to "削除する", find_book_post_information_path(post_information.find_book, post_information), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
+        <div>
+          <%= form_with model: [@find_book, @post_information] do |f| %>
+            <%= f.text_area :information, row: '5', placeholder: "目撃情報はこちらへ" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
     </div>
     <div>
       <h3>お持ちの書籍を出品する</h3>
@@ -23,6 +40,7 @@
         <%= f.submit "出品する" %>
       <% end %>
     </div>
+      <% end %>
     <div>
       <h3>出品一覧</h3>
       <p>出品数:<%= @find_book.sell_books.count %></p>
@@ -42,10 +60,18 @@
               <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
               <!--ユーザーが出品者の場合、削除リンクを表示する-->
               <% if sell_book.user == current_user %>
-                <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"} %></td>
+                <% if sell_book.bought_by?(sell_book) %>
+                  <td><%= link_to "発送先情報", sell_book_buy_books_path(sell_book) %></td>
+                <% else %>
+                  <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"} %></td>
+                <% end %>
               <!--ユーザーが投稿者の場合、購入リンクを表示する-->
               <% elsif @find_book.user == current_user %>
-                <td><%= link_to "購入する" %></td>
+                <% if sell_book.bought_by?(sell_book) %>
+                  <td><%= link_to "購入情報", sell_book_buy_books_path(sell_book) %></td>
+                <% else %>
+                  <td><%= link_to "購入する", new_sell_book_buy_books_path(sell_book) %></td>
+                <% end %>
               <% end %>
             </tr>
           <% end %>

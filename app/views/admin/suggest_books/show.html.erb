@@ -1,0 +1,25 @@
+<div>
+  <div>
+    <div>
+      <p>
+        ★<%= @suggest_book.favorites.count %>人のお気に入り
+      </p>
+    </div>
+    <div>
+    <%= render 'public/users/book_page', book: @suggest_book, user: @suggest_book.user %>
+    </div>
+    <div>
+      <%= link_to "削除する", admin_destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "本当に削除しますか？"} %>
+      <div>
+        <p>コメント<%= @suggest_book.post_comments.count %>件</p>
+        <% @suggest_book.post_comments.each do |post_comment| %>
+          <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+          <%= post_comment.user.name %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          <%= post_comment.comment %>
+          <%= link_to "削除する", admin_suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

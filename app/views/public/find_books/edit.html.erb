@@ -9,7 +9,15 @@
       <%= f.text_area :body %>
       <h4>ジャンル</h4>
       <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
-      <%= f.submit '変更を更新する' %>
+      <% if @find_book.is_draft == true %>
+        <%= f.submit "投稿を公開する", :name => 'publicize_draft' %>
+        <%= f.submit "下書きを更新する", :name => 'update_draft' %>
+      <% else %>
+        <%= f.submit '投稿を更新する', :name => 'update_post' %>
+      <% end %>
+      <div>
+        <%= link_to "削除する", destroy_find_book_path(@find_book), method: :delete, data: {confirm: "本当に削除しますか？" } %>
+      </div>
     <% end %>
   </div>
 </div>

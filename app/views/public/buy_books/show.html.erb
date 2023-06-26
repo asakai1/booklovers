@@ -1,22 +1,57 @@
 <div>
   <div>
-    <h2>購入情報</h2>
-    <p>書籍のタイトル</p>
-    <%= @sell_book.find_book.title %>
-    <p>価格</p>
-    <%= @sell_book.price %>
-    <p>購入確定から<%= @sell_book.shipping_date %>日以内</p>
-
-    <h2>発送先</h2>
-    <p>購入者氏名</p>
-    <%= @sell_book.purchaser_name %>
-    <p>郵便番号</p>
-    <%= @sell_book.postal_code %>
-    <p>住所</p>
-    <%= @sell_book.address %>
-    <p>電話番号</p>
-    <%= @sell_book.telephone_number %>
-    <p>購入確定日</p>
-    <%= @sell_book.updated_at.strftime('%Y/%m/%d') %>
+    <div>
+      <h2>購入情報</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>書籍名</th>
+            <td><%= @sell_book.find_book.title %></td>
+          </tr>
+          <tr>
+            <th>価格</th>
+            <td>¥<%= @sell_book.price.to_s(:delimited) %></td>
+          </tr>
+          <tr>
+            <th>発送日</th>
+            <td>購入確定から<%= @sell_book.shipping_date %>日以内</td>
+          </tr>
+          <tr>
+            <th>出品者</th>
+            <td><%= @sell_book.user.name %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>発送先</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>購入者氏名</th>
+            <td><%= @buy_book.name %></td>
+          </tr>
+          <tr>
+            <th>郵便番号</th>
+            <td>〒<%= @buy_book.postal_code %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @buy_book.address %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @buy_book.telephone_number %></td>
+          </tr>
+          <tr>
+            <th>支払い方法</th>
+            <td><%= @buy_book.payment_method_i18n %></td>
+          </tr>
+          <tr>
+            <th>購入確定日</th>
+            <td><%= @buy_book.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+

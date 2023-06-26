@@ -11,6 +11,7 @@ class Public::SuggestBooksController < ApplicationController
 
   def show
     @suggest_book = SuggestBook.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def index

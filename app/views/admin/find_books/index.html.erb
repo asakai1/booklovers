@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <div>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, admin_find_books_path(genre_id: genre.id) %>
+      <% end %>
+    </div>
+    <div>
+      <h4>探す投稿一覧</h4>
+      <% @find_books.each do |find_book| %>
+        <div>
+          <%= link_to find_book.title, admin_find_book_path(find_book) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div>
   <div>
     <p>発送先の情報を入力してください。</p>
-    <%= form_with model: @buy_book do |f| %>
+    <%= form_with model: [@sell_book, @buy_book] do |f| %>
       <h4>購入者氏名</h4>
       <%= f.text_field :name %>
       <h4>郵便番号</h4>

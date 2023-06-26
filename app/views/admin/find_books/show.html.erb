@@ -1,0 +1,48 @@
+<div>
+  <div>
+    <div>
+      <h2>書籍詳細</h2>
+      <%= render 'public/users/book_page', book: @find_book %>
+    </div>
+    <div>
+      <%= link_to "削除する", admin_destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"} %>
+      <div>
+        <p>目撃情報<%= @find_book.post_informations.count %>件</p>
+        <% @find_book.post_informations.each do |post_information| %>
+          <p><%= image_tag post_information.user.get_profile_image(100,100) %></p>
+          <%= post_information.user.name %>
+          <%= post_information.created_at.strftime('%Y/%m/%d') %>
+          <%= post_information.information %>
+          <%= link_to "削除する", admin_find_book_post_information_path(post_information.find_book, post_information), method: :delete %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <h3>出品一覧</h3>
+      <p>出品数:<%= @find_book.sell_books.count %></p>
+      <table>
+        <thead>
+          <tr>
+            <th>出品者</th>
+            <th>出品価格</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @find_book.sell_books.each do |sell_book| %>
+            <tr>
+              <td><%= sell_book.user.name %></td>
+              <td><%= sell_book.price %></td>
+              <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
+                <% if sell_book.bought_by?(sell_book) %>
+                  <td><%= link_to "発送先情報", sell_book_buy_books_path(sell_book) %></td>
+                <% else %>
+                  <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"} %></td>
+                <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

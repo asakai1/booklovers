@@ -9,7 +9,8 @@
       <%= f.text_area :body %>
       <h4>ジャンル</h4>
       <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
-      <%= f.submit '投稿する' %>
+      <%= f.submit '投稿する', :name => 'post' %>
+      <%= f.submit '下書きを保存', :name => 'draft' %>
     <% end %>
   </div>
 </div>

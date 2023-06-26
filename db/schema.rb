@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_25_084926) do
+ActiveRecord::Schema.define(version: 2023_06_26_082052) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -64,11 +64,19 @@ ActiveRecord::Schema.define(version: 2023_06_25_084926) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "suggest_book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "find_books", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id", null: false
-    t.string "title", null: false
-    t.text "body", null: false
+    t.integer "genre_id"
+    t.string "title"
+    t.text "body"
+    t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -76,6 +84,22 @@ ActiveRecord::Schema.define(version: 2023_06_25_084926) do
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment", null: false
+    t.integer "user_id", null: false
+    t.integer "suggest_book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "post_informations", force: :cascade do |t|
+    t.text "information", null: false
+    t.integer "user_id", null: false
+    t.integer "find_book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -91,9 +115,10 @@ ActiveRecord::Schema.define(version: 2023_06_25_084926) do
 
   create_table "suggest_books", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id", null: false
-    t.string "title", null: false
-    t.text "body", null: false
+    t.integer "genre_id"
+    t.string "title"
+    t.text "body"
+    t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
