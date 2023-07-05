@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
+    get 'about' => 'homes#about', as: 'about'
 
     # 退会確認
     get 'users/:id/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'
@@ -60,6 +61,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
+    delete 'gneres/:id/destroy' => 'genres#destroy', as: 'destroy_genre'
     resources :genres, only: %i[index create edit update]
 
     # 会員の削除（削除フラグの切替）

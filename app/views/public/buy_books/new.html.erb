@@ -1,18 +1,25 @@
-<div>
-  <div>
-    <p>発送先の情報を入力してください。</p>
-    <%= form_with model: [@sell_book, @buy_book] do |f| %>
-      <h4>購入者氏名</h4>
-      <%= f.text_field :name %>
-      <h4>郵便番号</h4>
-      <%= f.text_field :postal_code %>
-      <h4>住所</h4>
-      <%= f.text_field :address %>
-      <h4>電話番号</h4>
-      <%= f.text_field :telephone_number %>
-      <%= f.radio_button :payment_method, BuyBook.payment_methods.key(0) %>
-      <%= f.label :payment_method_cash_on_delivery, BuyBook.payment_methods_i18n[:cash_on_delivery] %>
-      <%= f.submit '購入を確定する' %>
-    <% end %>
+<%= flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+      <h4>発送先の情報を入力してください。</h4>
+      <p class="list-unstyled text-danger"><% if @buy_book.errors.any? %></p>
+        <%= @buy_book.errors.count %>件のエラーが発生しました。
+          <ul class="list-unstyled text-danger">
+            <% @buy_book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      <% end %>
+      <%= form_with model: [@sell_book, @buy_book] do |f| %>
+        <%= f.text_field :name, placeholder: "購入者氏名", class:"mt-3" %></br>
+        <%= f.text_field :postal_code, placeholder: "郵便番号", class:"mt-3" %></br>
+        <%= f.text_field :address, placeholder: "住所", class:"mt-3" %></br>
+        <%= f.text_field :telephone_number, placeholder: "電話番号", class:"mt-3 mb-3" %></br>
+        <%= f.radio_button :payment_method, BuyBook.payment_methods.key(0) %>
+        <%= f.label :payment_method_cash_on_delivery, BuyBook.payment_methods_i18n[:cash_on_delivery] %></br>
+        <%= f.submit '購入を確定する', class:"btn btn-outline-dark mt-3" %>
+      <% end %>
+    </div>
   </div>
 </div>

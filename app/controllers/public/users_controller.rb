@@ -5,7 +5,10 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     # 会員の投稿を全て取得
     @find_books = @user.find_books
-    @suggest_books = @user.suggest_books.all
+    @suggest_books = @user.suggest_books
+    @favorites = current_user.favorites
+    @sell_books = current_user.sell_books
+    @buy_books = current_user.buy_books
   end
 
   # 会員情報の編集

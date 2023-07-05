@@ -10,8 +10,11 @@ class Public::BuyBooksController < ApplicationController
     @buy_book = BuyBook.new(buy_book_params)
     @buy_book.user_id = current_user.id
     @buy_book.sell_book_id = @sell_book.id
-    @buy_book.save
-    redirect_to sell_book_buy_books_path
+    if @buy_book.save
+      redirect_to sell_book_buy_books_path, notice: "購入を確定しました"
+    else
+      render :new, alert: "購入を確定できませんでした。入力項目をご確認ください。"
+    end
   end
 
   def show

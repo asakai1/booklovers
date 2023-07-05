@@ -6,4 +6,8 @@ class Public::HomesController < ApplicationController
     @find_books = FindBook.order('id ASC').limit(4)
     @suggest_books = SuggestBook.order('id ASC').limit(4)
   end
+
+  def about
+  end
+
 end

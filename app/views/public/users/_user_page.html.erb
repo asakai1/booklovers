@@ -1,10 +1,11 @@
-<div>
-  <div>
-    <h2><%= user.name %>さんのページ</h2>
-    <div>
-      <%= image_tag user.get_profile_image(100,100) %>
+<div class="container">
+  <div class="row">
+    <div class="mt-5">
+      <%= image_tag user.get_profile_image(200,200) %>
     </div>
-    <table>
+    <div class="col-lg-5 offset-lg-1">
+    <h2 class="mt-3"><%= user.name %>さんのページ</h2>
+    <table class="table mt-3">
       <tbody>
         <tr>
           <th>紹介文</th>

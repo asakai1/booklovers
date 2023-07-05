@@ -2,68 +2,96 @@
 <html>
   <head>
     <title>Booklovers</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "探す一覧", find_books_path %>
-        </li>
-        <li>
-          <%= link_to "おすすめ一覧", suggest_books_path %>
-        </li>
-        <li>
-          <%= link_to "マイページ", user_path(current_user.id) %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-        <div>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%= image_tag('booklovers.jpg') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto mt-3">
+              <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "探す一覧", find_books_path, class:"btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "おすすめ一覧", suggest_books_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "探す一覧", admin_find_books_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "おすすめ一覧", admin_suggest_books_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_root_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: "btn btn-outline-dark m-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "About", about_path,  class: "btn btn-outline-dark m-1" %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col-lg-6 ml-auto mb-3">
           <%= form_with url: finder_path, method: :get, local: :true do |f| %>
-            <%= f.select :range, options_for_select([["探している書籍",'FindBook'], ["おすすめ書籍",'SuggestBook']]) %>
-            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-            <%= f.text_field :word %>
-            <%= f.submit "検索" %>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <%= f.select :range, options_for_select([["探している書籍",'FindBook'], ["おすすめ書籍",'SuggestBook']]), {}, class:"custom-select m-1" %>
+                <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]), {}, class:"custom-select m-1" %>
+                <%= f.text_field :word, class:"form-control m-1 col-lg-5", id:"input-text-group", placeholder: "キーワード検索" %>
+                <%= f.submit "検索", class:"btn btn-outline-dark m-1", id:"input-text-group" %>
+              </div>
+            </div>
           <% end %>
         </div>
-      <% elsif admin_signed_in? %>
-        <li>
-          <%= link_to "ジャンル一覧", genres_path %>
-        </li>
-        <li>
-          <%= link_to "探す一覧", find_books_path %>
-        </li>
-        <li>
-          <%= link_to "おすすめ一覧", suggest_books_path %>
-        </li>
-        <li>
-          <%= link_to "会員一覧", admin_root_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-        <li>
-          <%= link_to "ゲストログイン", guest_sign_in_path, method: :post %>
-        </li>
-        <li>
-          <%= link_to "About" %>
-        </li>
-      <% end %>
+      </div>
     </header>
     <%= yield %>
+    <footer>
+      <div class="container">
+        <div clss="row no-gutters">
+          <div class="d-flex justify-content-center m-5">
+            <p>Booklovers</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -15,11 +15,16 @@ class Admin::GenresController < ApplicationController
   end
 
   def update
-    @genre = Genre(genre_params)
-    @genre.save
+    @genre = Genre.find(params[:id])
+    @genre.update(genre_params)
     redirect_to admin_genres_path, notice: "ジャンル名を更新しました"
   end
 
+  def destroy
+    @genre = Genre.find(params[:id])
+    @genre.destroy
+    redirect_to admin_genres_path, notice: "ジャンルを削除しました"
+  end
   private
 
   def genre_params

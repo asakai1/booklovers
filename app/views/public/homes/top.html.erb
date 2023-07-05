@@ -1,15 +1,21 @@
 <%= flash[:notice] %>
-<div>
-  <div>
-    <div>
+<div class="container">
+  <div class="row">
+    <div class="d-flex flex-column m-3">
       <h2>新着探す投稿</h2>
-      <%= link_to "一覧はこちら", find_books_path %>
-      <%= render 'public/users/index', books: @find_books %>
+      <%= link_to "一覧はこちら", find_books_path, class:"m-3" %>
+      <div class="d-flex flex-wrap">
+        <%= render 'public/users/index', books: @find_books %>
+      </div>
     </div>
-    <div>
+  </div>
+  <div class="row" >
+    <div class="d-flex flex-column m-3">
       <h2>新規おすすめ投稿</h2>
-      <%= link_to "一覧はこちら", suggest_books_path %>
-      <%= render 'public/users/index', books: @suggest_books %>
+      <%= link_to "一覧はこちら", suggest_books_path, class:"m-3" %>
+      <div class="d-flex flex-wrap">
+        <%= render 'public/users/index', books: @suggest_books %>
+      </div>
     </div>
   </div>
 </div>

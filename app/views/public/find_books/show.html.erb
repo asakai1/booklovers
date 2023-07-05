@@ -1,54 +1,72 @@
-<div>
-  <div>
-    <div>
-      <h2>書籍詳細</h2>
+<%= flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="mr-auto">
+      <h2 class="m-5">書籍詳細</h2>
       <%= render 'public/users/book_page', book: @find_book %>
+      <div class="mt-3">
+        <% if @find_book.user == current_user %>
+          <%= link_to "編集する", edit_find_book_path(@find_book), class:"btn btn-outline-dark" %>
+          <%= link_to "削除する", destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"}, class:"btn btn-outline-danger" %>
+        <% end %>
+      </div>
     </div>
-    <div>
-      <% if @find_book.user == current_user %>
-        <%= link_to "編集する", edit_find_book_path(@find_book) %>
-        <%= link_to "削除する", destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"} %>
-      <% else %>
-        <div>
-          <p>目撃情報<%= @find_book.post_informations.count %>件</p>
-          <% @find_book.post_informations.each do |post_information| %>
-            <p><%= image_tag post_information.user.get_profile_image(100,100) %></p>
-            <%= post_information.user.name %>
-            <%= post_information.created_at.strftime('%Y/%m/%d') %>
-            <%= post_information.information %>
-            <% if post_information.user == current_user %>
-              <%= link_to "削除する", find_book_post_information_path(post_information.find_book, post_information), method: :delete %>
-            <% end %>
-          <% end %>
-        </div>
+    <div class="ml-auto mt-5 col-md-7">
+        <p>目撃情報<%= @find_book.post_informations.count %>件</p>
         <div>
           <%= form_with model: [@find_book, @post_information] do |f| %>
-            <%= f.text_area :information, row: '5', placeholder: "目撃情報はこちらへ" %>
-            <%= f.submit "送信する" %>
+            <%= f.text_area :information, row: '5', placeholder: "目撃情報はこちらへ", class:"mt-3" %></br>
+            <%= f.submit "送信する", class:"btn btn-outline-dark mt-3" %>
+          <% end %>
+        </div>
+        <div class="d-flex flex-wrap mt-3">
+          <% @find_book.post_informations.each do |post_information| %>
+          <div class="card col-md-4">
+            <div class="card-body">
+              <p class="card-text"><%= post_information.information %></p>
+              <div class="row">
+                <div>
+              <p><%= image_tag post_information.user.get_profile_image(50,50) %></p>
+                </div>
+                <div>
+              <p class="card-text"><%= link_to post_information.user.name, user_path(post_information.user) %></p>
+              <p class="card-text"><%= post_information.created_at.strftime('%Y/%m/%d') %></p>
+                </div>
+              </div>
+              <% if post_information.user == current_user %>
+                <%= link_to "削除する", find_book_post_information_path(post_information.find_book, post_information), method: :delete, class:"text-danger" %>
+              <% end %>
+            </div>
+            </div>
           <% end %>
         </div>
     </div>
-    <div>
+  </div>
+  <div class="row">
+    <div class="mr-auto mt-5">
       <h3>お持ちの書籍を出品する</h3>
       <%= form_with model: @sell_book do |f| %>
         <p>価格</p>
-        <%= f.text_field :price %>
+        <p>¥<%= f.text_field :price %></p>
         <p>発送可能日</p>
         <p>購入確定から</p>
-        <p><%= f.text_field :shipping_date %>日以内</p>
+        <p><%= f.number_field :shipping_date %>日以内</p>
         <%= f.hidden_field :find_book_id, :value => @find_book.id %>
-        <%= f.submit "出品する" %>
+        <%= f.submit "出品する", class:"btn btn-outline-dark mt-3" %>
       <% end %>
     </div>
-      <% end %>
-    <div>
-      <h3>出品一覧</h3>
-      <p>出品数:<%= @find_book.sell_books.count %></p>
-      <table>
+    <div class="mt-5 col-md-7">
+      <div class="d-flex align-items-end">
+        <h3 class="mt-5">出品一覧</h3>
+        <h6 class="ml-3">出品数:<%= @find_book.sell_books.count %></h6>
+      </div>
+      <table class="table mt-3">
         <thead>
           <tr>
             <th>出品者</th>
             <th>出品価格</th>
+            <th>出品日</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -56,14 +74,14 @@
           <% @find_book.sell_books.each do |sell_book| %>
             <tr>
               <td><%= sell_book.user.name %></td>
-              <td><%= sell_book.price %></td>
+              <td>¥<%= sell_book.price %></td>
               <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
               <!--ユーザーが出品者の場合、削除リンクを表示する-->
               <% if sell_book.user == current_user %>
                 <% if sell_book.bought_by?(sell_book) %>
                   <td><%= link_to "発送先情報", sell_book_buy_books_path(sell_book) %></td>
                 <% else %>
-                  <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"} %></td>
+                  <td><%= link_to "取り消す", destroy_sell_book_path(sell_book), method: :delete, data: { confirm: "出品を取り消しますか？"}, class:"text-danger" %></td>
                 <% end %>
               <!--ユーザーが投稿者の場合、購入リンクを表示する-->
               <% elsif @find_book.user == current_user %>

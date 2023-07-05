@@ -1,11 +1,16 @@
-<div>
-  <div>
-    <duv>
-      <%= book.title %>
-      <%= book.body %>
-      <%= book.genre.name %>
-      <%= book.user.name %>
-      <p>投稿した日<%= book.created_at.strftime('%Y/%m/%d') %></p>
-    </duv>
+<div class="container">
+  <div class="mt-3">
+    <h4><%= book.title %></h4>
+    <h5><%= book.body %></h5>
+    <h5>ジャンル：<%= book.genre.name %></h5>
+    <div class="row">
+      <div>
+        <%= image_tag book.user.get_profile_image(200,200), class:"mt-3 rounded-circle"; %>
+      </div>
+      <div class="mt-5">
+        <h5>投稿者：<%= link_to book.user.name, book.user %></h5>
+        <h5>投稿日：<%= book.created_at.strftime('%Y/%m/%d') %></h5>
+      </div>
+    </div>
   </div>
 </div>

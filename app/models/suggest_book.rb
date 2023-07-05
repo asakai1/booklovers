@@ -5,6 +5,11 @@ class SuggestBook < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+  validates :user_id, presence: true
+  validates :genre_id, presence: true
+  validates :title, presence: true
+  validates :body, presence: true
+
   def self.looks(searches, words)
     if searches == "perfect_match"
       @suggest_book = SuggestBook.where("title LIKE ?", "#{words}")

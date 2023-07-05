@@ -4,8 +4,14 @@ class Public::PostCommentsController < ApplicationController
     suggest_book = SuggestBook.find(params[:suggest_book_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.suggest_book_id = suggest_book.id
-    comment.save
-    redirect_to suggest_book_path(suggest_book)
+    if comment.save
+      redirect_to suggest_book_path(suggest_book), notice: "コメントを投稿しました。"
+    else
+      @error_comment = comment
+      @suggest_book = SuggestBook.find(params[:suggest_book_id])
+      @post_comment = PostComment.new
+      render 'public/suggest_books/show', alert: "コメントを投稿できませんでした。"
+    end
   end
 
   def destroy
