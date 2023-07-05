@@ -3,13 +3,15 @@ class Public::SellBooksController < ApplicationController
   def create
     sell_book = SellBook.new(sell_book_params)
     sell_book.user_id = current_user.id
-    sell_book.save
-    redirect_to find_book_path(sell_book.find_book)
+    if sell_book.save
+      redirect_to find_book_path(sell_book.find_book), notice: "出品に成功しました"
+    else
+      render 'public/find_books/show'
   end
 
   def destroy
     sell_book = SellBook.find(params[:id]).destroy
-    redirect_to find_book_path(sell_book.find_book)
+    redirect_to find_book_path(sell_book.find_book), notice: "出品を取り消しました"
   end
 
   private

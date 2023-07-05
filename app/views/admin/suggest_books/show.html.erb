@@ -1,14 +1,12 @@
-<div>
-  <div>
-    <div>
+<div class="container">
+  <div class="row">
+    <div class="mr-auto mt-5">
       <p>
         ★<%= @suggest_book.favorites.count %>人のお気に入り
       </p>
+      <%= render 'public/users/book_page', book: @suggest_book, user: @suggest_book.user %>
     </div>
-    <div>
-    <%= render 'public/users/book_page', book: @suggest_book, user: @suggest_book.user %>
-    </div>
-    <div>
+    <div class="col-md-7 ml-5">
       <%= link_to "削除する", admin_destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "本当に削除しますか？"} %>
       <div>
         <p>コメント<%= @suggest_book.post_comments.count %>件</p>

@@ -73,9 +73,10 @@ ActiveRecord::Schema.define(version: 2023_06_26_082052) do
 
   create_table "find_books", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id"
-    t.string "title"
-    t.text "body"
+    t.integer "genre_id", null: false
+    t.string "title", null: false
+    t.string "author"
+    t.text "body", null: false
     t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -104,7 +105,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_082052) do
   end
 
   create_table "sell_books", force: :cascade do |t|
-    t.integer "find_book_id", null: false
+    t.integer "title", null: false
     t.integer "user_id", null: false
     t.integer "price", null: false
     t.integer "shipping_date", null: false
@@ -114,10 +115,10 @@ ActiveRecord::Schema.define(version: 2023_06_26_082052) do
 
   create_table "suggest_books", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id"
-    t.string "title"
-    t.text "body"
-    t.boolean "is_draft", default: false, null: false
+    t.integer "genre_id", null: false
+    t.string "title", null: false
+    t.string "author"
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

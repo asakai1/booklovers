@@ -3,9 +3,20 @@
     <div class="mx-auto mt-5">
       <p>お探しの書籍の内容を変更します。</p>
       <p>書籍の写真は投稿できません。</p>
+      <!--エラーメッセージ-->
+      <% if @find_book.errors.any? %>
+        <p class="text-danger"><%= @find_book.errors.count %>件のエラーが発生しました。</p>
+          <ul class="list-unstyled text-danger">
+            <% @find_book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      <% end %>
       <%= form_with model: @find_book, url: update_find_book_path, method: :patch do |f| %>
         <h5 class="mt-3">書籍名</h5>
         <%= f.text_field :title %>
+        <h5 class="mt-3">著者</h5>
+        <%= f.text_field :author %>
         <h5 class="mt-3">書籍の説明</h5>
         <%= f.text_area :body %>
         <h5 class="mt-3">ジャンル</h5>

@@ -1,14 +1,11 @@
 class Admin::FindBooksController < ApplicationController
 
   def index
-    @genres = Genre.all
-    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books : FindBook.all
+    @find_books = FindBook.page(params[:page])
   end
 
   def show
     @find_book = FindBook.find(params[:id])
-    @post_information = PostInformation.new
-    @sell_book = SellBook.new
   end
 
   def destroy

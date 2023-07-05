@@ -63,3 +63,6 @@ gem 'devise-i18n'
 
 # enumの設定のため導入
 gem "enum_help"
+
+# ページネーション
+gem 'kaminari','~> 1.2.1'

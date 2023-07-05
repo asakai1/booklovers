@@ -1,9 +1,10 @@
-<%= flash[:notice] %>
 <div class="container">
   <div class="row">
     <div class="mx-auto mt-5">
       <h4>発送先の情報を入力してください。</h4>
-      <p class="list-unstyled text-danger"><% if @buy_book.errors.any? %></p>
+      <p class="list-unstyled text-danger">
+      <!--エラーメッセージ-->
+      <% if @buy_book.errors.any? %></p>
         <%= @buy_book.errors.count %>件のエラーが発生しました。
           <ul class="list-unstyled text-danger">
             <% @buy_book.errors.full_messages.each do |message| %>

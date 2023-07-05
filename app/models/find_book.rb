@@ -13,10 +13,9 @@ class FindBook < ApplicationRecord
     end
   end
 
-  with_options presence: true, on: :publicize do
-    validates :title
-    validates :body
-  end
-  validates :title, length: {maximum: 30 }, on: :publicize
-  validates :body, length: {maximum: 400 }, on: :publicize
+  validates :user_id, presence: true
+  validates :genre_id, presence: true
+  validates :title, presence: true, length: {maximum: 30 }
+  validates :body, presence: true, length: {maximum: 400 }
+
 end

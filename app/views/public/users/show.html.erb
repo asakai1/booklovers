@@ -29,9 +29,9 @@
         　<% if @buy_books.present? %>
         　   <table class="table">
             <% @buy_books.each do |buy_book| %>
-        　     <tr>
-        　       <td><%=link_to buy_book.sell_book.find_book.title, 'public/find_books/buy_book.sell_book.find_book.id/buy_book' %></td>
-        　     </tr>
+              <tr>
+                <td><%= link_to buy_book.sell_book.find_book.title, 'public/find_books/buy_book.sell_book.find_book.id/buy_book' %></td>
+              </tr>
         　   <% end %>
         　  </table>
         　<% else %>

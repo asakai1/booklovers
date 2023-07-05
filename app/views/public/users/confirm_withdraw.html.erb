@@ -1,9 +1,11 @@
-<div>
-  <div>
-    <h2>退会処理確認</h2>
-    <p>退会するとアカウントが使用できなくなります</p>
-    <p>本当に退会しますか？</p>
-    <%= link_to "退会しない", user_path(current_user) %>
-    <%= link_to "退会する", withdraw_path, method: :patch, alert: "退会処理を実行しますか？" %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h2>退会処理確認</h2>
+      <p>退会するとアカウントが使用できなくなります</p>
+      <p>本当に退会しますか？</p>
+      <%= link_to "退会しない", user_path(current_user), class:"btn btn-outline-dark mt-3" %>
+      <%= link_to "退会する", withdraw_path, method: :patch, alert: "退会処理を実行しますか？", class:"btn btn-outline-danger mt-3" %>
+    </div>
   </div>
 </div>

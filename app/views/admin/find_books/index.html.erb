@@ -1,17 +1,25 @@
-<div>
-  <div>
-    <div>
-      <% @genres.each do |genre| %>
-        <%= link_to genre.name, admin_find_books_path(genre_id: genre.id) %>
-      <% end %>
-    </div>
-    <div>
+<%= flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+      <table class="table mt-5">
       <h4>探す投稿一覧</h4>
-      <% @find_books.each do |find_book| %>
-        <div>
-          <%= link_to find_book.title, admin_find_book_path(find_book) %>
-        </div>
-      <% end %>
+        <thead>
+          <tr>
+            <th>書籍名</th>
+            <th>投稿者</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @find_books.each do |find_book| %>
+            <tr>
+              <td><%= link_to find_book.title, admin_find_book_path(find_book) %></td>
+              <td><%= find_book.user.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+<%= paginate @find_books %>

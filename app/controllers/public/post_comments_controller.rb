@@ -10,7 +10,7 @@ class Public::PostCommentsController < ApplicationController
       @error_comment = comment
       @suggest_book = SuggestBook.find(params[:suggest_book_id])
       @post_comment = PostComment.new
-      render 'public/suggest_books/show', alert: "コメントを投稿できませんでした。"
+      render 'public/suggest_books/show'
     end
   end
 

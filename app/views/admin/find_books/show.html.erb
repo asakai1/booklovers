@@ -1,12 +1,11 @@
-<div>
-  <div>
-    <div>
+<div class="container">
+  <div class="row">
+    <div class="mr-auto mt-5">
       <h2>書籍詳細</h2>
       <%= render 'public/users/book_page', book: @find_book %>
-    </div>
-    <div>
       <%= link_to "削除する", admin_destroy_find_book_path(@find_book), method: :delete, data: { confirm: "投稿を削除しますか？"} %>
-      <div>
+    </div>
+    <div class="col-md-7 ml-5 mt-3">
         <p>目撃情報<%= @find_book.post_informations.count %>件</p>
         <% @find_book.post_informations.each do |post_information| %>
           <p><%= image_tag post_information.user.get_profile_image(100,100) %></p>
@@ -16,8 +15,6 @@
           <%= link_to "削除する", admin_find_book_post_information_path(post_information.find_book, post_information), method: :delete %>
         <% end %>
       </div>
-    </div>
-    <div>
       <h3>出品一覧</h3>
       <p>出品数:<%= @find_book.sell_books.count %></p>
       <table>

@@ -5,8 +5,11 @@ class Public::SuggestBooksController < ApplicationController
 
   def create
     @suggest_book = current_user.suggest_books.new(suggest_book_params)
-    @suggest_book.save
-    redirect_to suggest_book_path(@suggest_book), notice: "おすすめの書籍の投稿に成功しました。"
+    if @suggest_book.save
+      redirect_to suggest_book_path(@suggest_book), notice: "おすすめの書籍の投稿に成功しました。"
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -16,7 +19,7 @@ class Public::SuggestBooksController < ApplicationController
 
   def index
     @genres = Genre.all
-    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books : SuggestBook.all
+    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books : SuggestBook.page(params[:page])
   end
 
   def edit
@@ -25,8 +28,11 @@ class Public::SuggestBooksController < ApplicationController
 
   def update
     @suggest_book = SuggestBook.find(params[:id])
-    @suggest_book.update(suggest_book_params)
-    redirect_to suggest_book_path(@suggest_book), notice: "おすすめの書籍の更新に成功しました。"
+    if @suggest_book.update(suggest_book_params)
+      redirect_to suggest_book_path(@suggest_book), notice: "おすすめの書籍の更新に成功しました。"
+    else
+      render 'edit'
+    end
   end
 
   def destroy

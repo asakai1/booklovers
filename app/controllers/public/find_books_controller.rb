@@ -9,13 +9,13 @@ class Public::FindBooksController < ApplicationController
       if @find_book.save
         redirect_to find_book_path(@find_book), notice: "探している書籍の投稿に成功しました。"
       else
-        render :new, alert: "投稿できませんでした。入力内容を内容をご確認ください。"
+        render 'new'
       end
   end
 
   def index
     @genres = Genre.all
-    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books : FindBook.all
+    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books : FindBook.page(params[:page])
   end
 
   def show
@@ -33,7 +33,7 @@ class Public::FindBooksController < ApplicationController
       if @find_book.update(find_book_params)
         redirect_to find_book_path(@find_book), notice: "投稿の更新に成功しました。"
       else
-        render :edit, alert: "更新できませんでした。入力内容をご確認ください。"
+        render 'edit'
       end
   end
 

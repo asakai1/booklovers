@@ -2,12 +2,10 @@ class Admin::SuggestBooksController < ApplicationController
 
   def show
     @suggest_book = SuggestBook.find(params[:id])
-    @post_comment = PostComment.new
   end
 
   def index
-    @genres = Genre.all
-    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books : SuggestBook.all
+    @suggest_books = SuggestBook.page(params[:page])
   end
 
   def destroy
