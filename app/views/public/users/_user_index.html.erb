@@ -6,10 +6,6 @@
         <p class="card-text"><%= book.author %></p>
         <p class="card-text"><%= book.body %></p>
         <p class="card-text">ジャンル：<%= book.genre.name %></p>
-        <div>
-          <%= image_tag book.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
-          <p>投稿者：<%= link_to book.user.name, book.user %></p>
-        </div>
       </div>
     </div>
   <% end %>

@@ -1,4 +1,5 @@
 class Public::PostCommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     suggest_book = SuggestBook.find(params[:suggest_book_id])

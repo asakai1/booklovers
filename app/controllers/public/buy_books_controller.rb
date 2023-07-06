@@ -1,4 +1,5 @@
 class Public::BuyBooksController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @sell_book = SellBook.find(params[:sell_book_id])

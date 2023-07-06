@@ -2,6 +2,15 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto mt-5">
+      <!--エラーメッセージ-->
+      <% if @genre.errors.any? %></p>
+        <%= @genre.errors.count %>件のエラーが発生しました。
+          <ul class="list-unstyled text-danger">
+            <% @genre.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      <% end %>
       <!--ジャンルの追加-->
       <%= form_with model: @genre, url: admin_genres_path do |f| %>
         <%= f.label :"ジャンル名" %>
@@ -16,7 +25,7 @@
             <tr>
               <td><%= genre.name %></td>
               <td><%= link_to "編集する", edit_admin_genre_path(genre.id) %></td>
-              <td><%= link_to "削除する", admin_destroy_genre_path(genre.id), method: :delete, class:"text-danger" %></td>
+              <td><%= link_to "削除する", admin_destroy_genre_path(genre.id), method: :delete, class:"text-danger", data: { confirm: "ジャンルを削除しますか？"} %></td>
             </tr>
           <% end %>
         </tbody>

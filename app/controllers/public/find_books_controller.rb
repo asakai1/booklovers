@@ -1,4 +1,6 @@
 class Public::FindBooksController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @find_book = FindBook.new
   end
@@ -15,7 +17,7 @@ class Public::FindBooksController < ApplicationController
 
   def index
     @genres = Genre.all
-    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books : FindBook.page(params[:page])
+    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books.page(params[:page]) : FindBook.page(params[:page])
   end
 
   def show
@@ -46,7 +48,7 @@ class Public::FindBooksController < ApplicationController
   private
 
   def find_book_params
-    params.require(:find_book).permit(%i[genre_id title body])
+    params.require(:find_book).permit(%i[genre_id title author body])
   end
 
 end

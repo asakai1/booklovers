@@ -34,11 +34,49 @@
               </tr>
         　   <% end %>
         　  </table>
+          <% else %>
+            <div class="m-3">
+              <h6 class="ml-3">購入履歴がありません</h6>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--目撃情報投稿履歴の表示-->
+        <div class="col-md-5 my-5 mx-1">
+          <h4 class="mb-3 ml-5">目撃情報投稿履歴</h4>
+        　<% if @post_informations.present? %>
+        　   <table class="table">
+            <% @post_informations.each do |post_information| %>
+              <tr>
+                <td><%= link_to post_information.find_book.title, find_book_path(post_information.find_book) %></td>
+              </tr>
+        　   <% end %>
+        　  </table>
         　<% else %>
         　   <div class="m-3">
-        　     <h6 class="ml-3">購入履歴がありません</h6>
+              <h6 class="ml-3">投稿がありません</h6>
         　   </div>
         　<% end %>
+        </div>
+
+        <!--コメント投稿履歴の表示-->
+        <div class="col-md-5 offset-md-0 border-left my-5 mx-1">
+          <h4 class="mb-3 ml-5">コメント投稿履歴</h4>
+        　<% if @post_comments.present? %>
+        　   <table class="table">
+            <% @post_comments.each do |post_comment| %>
+              <tr>
+                <td><%= link_to post_comment.suggest_book.title, suggest_book_path(post_comment.suggest_book) %></td>
+              </tr>
+        　   <% end %>
+        　  </table>
+          <% else %>
+            <div class="m-3">
+              <h6 class="ml-3">投稿がありません</h6>
+            </div>
+          <% end %>
         </div>
       </div>
 

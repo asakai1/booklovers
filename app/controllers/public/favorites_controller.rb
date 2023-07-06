@@ -1,4 +1,6 @@
 class Public::FavoritesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     suggest_book = SuggestBook.find(params[:suggest_book_id])
     favorite = current_user.favorites.new(suggest_book_id: suggest_book.id)

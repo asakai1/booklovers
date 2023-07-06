@@ -51,7 +51,7 @@
         <p>発送可能日</p>
         <p>購入確定から</p>
         <p><%= f.number_field :shipping_date %>日以内</p>
-        <%= f.hidden_field :title, :value => @find_book.title %>
+        <%= f.hidden_field :find_book_id, :value => @find_book.id %>
         <%= f.submit "出品する", class:"btn btn-outline-dark mt-3" %>
       <% end %>
     </div>

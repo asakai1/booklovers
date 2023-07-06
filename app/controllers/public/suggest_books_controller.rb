@@ -1,4 +1,6 @@
 class Public::SuggestBooksController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @suggest_book = SuggestBook.new
   end
@@ -19,7 +21,7 @@ class Public::SuggestBooksController < ApplicationController
 
   def index
     @genres = Genre.all
-    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books : SuggestBook.page(params[:page])
+    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books.page(params[:page]) : SuggestBook.page(params[:page])
   end
 
   def edit
@@ -45,7 +47,7 @@ class Public::SuggestBooksController < ApplicationController
   private
 
   def suggest_book_params
-    params.require(:suggest_book).permit(%i[genre_id title body])
+    params.require(:suggest_book).permit(%i[genre_id title author body])
   end
 
 end

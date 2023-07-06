@@ -1,4 +1,6 @@
 class Public::FindersController < ApplicationController
+  before_action :authenticate_user!
+
   def finder
     @range = params[:range]
 

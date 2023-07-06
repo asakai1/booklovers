@@ -1,4 +1,6 @@
 class Public::PostInformationsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     find_book = FindBook.find(params[:find_book_id])
     information = current_user.post_informations.new(post_information_params)

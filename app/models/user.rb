@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :find_books, dependent: :destroy
   has_many :suggest_books, dependent: :destroy
   has_many :sell_books, dependent: :destroy
-  has_many :buy_books
+  has_many :buy_books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_informations, dependent: :destroy

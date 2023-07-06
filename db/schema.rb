@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_082052) do
   end
 
   create_table "sell_books", force: :cascade do |t|
-    t.integer "title", null: false
+    t.integer "find_book_id", null: false
     t.integer "user_id", null: false
     t.integer "price", null: false
     t.integer "shipping_date", null: false

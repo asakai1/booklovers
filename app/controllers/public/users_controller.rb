@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
 
   # 会員詳細ページ・マイページ
   def show
@@ -9,6 +10,8 @@ class Public::UsersController < ApplicationController
     @favorites = current_user.favorites
     @sell_books = current_user.sell_books
     @buy_books = current_user.buy_books
+    @post_informations = current_user.post_informations
+    @post_comments = current_user.post_comments
   end
 
   # 会員情報の編集
