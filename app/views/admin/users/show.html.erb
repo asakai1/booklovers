@@ -33,6 +33,42 @@
       </table>
     </div>
     <div class="ml-5 col-md-7 mt-5">
+      <h4>出品履歴一覧</h4>
+      <table class="table mt-3">
+        <% @sell_books.each do |sell_book| %>
+          <tr>
+            <td><%= link_to sell_book.find_book.title, admin_find_book_path(sell_book.find_book) %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <h4>購入履歴一覧</h4>
+      <table class="table mt-3">
+        <% @buy_books.each do |buy_book| %>
+          <tr>
+            <td><%= link_to buy_book.sell_book.find_book.title, admin_sell_book_buy_books_path(buy_book.sell_book, buy_book) %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <h4>目撃情報投稿履歴一覧</h4>
+      <table class="table mt-3">
+        <% @post_informations.each do |post_information| %>
+          <tr>
+            <td><%= link_to post_information.find_book.title, admin_find_book_path(post_information.find_book)  %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <h4>コメント投稿履歴一覧</h4>
+      <table class="table mt-3">
+        <% @post_comments.each do |post_comment| %>
+          <tr>
+            <td><%= link_to post_comment.suggest_book.title, suggest_book_path(post_comment.suggest_book)  %></td>
+          </tr>
+        <% end %>
+      </table>
+
       <h4>お気に入り一覧</h4>
       <table class="table mt-3">
         <% @favorites.each do |favorite| %>

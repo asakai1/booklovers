@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_informations, dependent: :destroy
 
+  validates :name, presence: true, length: { in: 2..20 }, uniqueness: true
+  validates :introduction, length: {maximum: 50 }
+  validates :email, presence: true
+
   # プロフィール画像用にactivestrageを追加
   has_one_attached :profile_image
 
@@ -34,6 +38,5 @@ class User < ApplicationRecord
       user.name = 'ゲスト'
     end
   end
-
 
 end

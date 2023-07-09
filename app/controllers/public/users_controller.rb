@@ -22,8 +22,11 @@ class Public::UsersController < ApplicationController
   # 会員情報の更新
   def update
     @user = current_user
-    @user.update(user_params)
-    redirect_to user_path(current_user), notice: '会員情報を更新しました'
+    if @user.update(user_params)
+      redirect_to user_path(current_user), notice: '会員情報を更新しました'
+    else
+      render 'edit'
+    end
   end
 
   # 退会処理
@@ -37,7 +40,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(%i[name email introduction profile_image])
+    params.require(:user).permit(%i[name email introduction profile_image is_deleted])
   end
 
 end

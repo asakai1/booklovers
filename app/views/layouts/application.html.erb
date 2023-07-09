@@ -73,9 +73,9 @@
           <%= form_with url: finder_path, method: :get, local: :true do |f| %>
             <div class="input-group">
               <div class="input-group-prepend">
-                <%= f.select :range, options_for_select([["探している書籍",'FindBook'], ["おすすめ書籍",'SuggestBook']]), {}, class:"custom-select m-1" %>
+                <%= f.select :range, options_for_select([["探す書籍",'FindBook'], ["おすすめ書籍",'SuggestBook']]), {}, class:"custom-select m-1" %>
                 <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]), {}, class:"custom-select m-1" %>
-                <%= f.text_field :word, class:"form-control m-1 col-lg-5", id:"input-text-group", placeholder: "キーワード検索" %>
+                <%= f.text_field :word, class:"form-control m-1 col-lg-5", id:"input-text-group", placeholder: "書籍名で検索" %>
                 <%= f.submit "検索", class:"btn btn-outline-dark m-1", id:"input-text-group" %>
               </div>
             </div>

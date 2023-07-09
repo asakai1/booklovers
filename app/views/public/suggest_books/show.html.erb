@@ -3,7 +3,7 @@
   <div class="row">
     <div class="mr-auto">
       <!--書籍の詳細情報-->
-      <h2 class="ml-5 mt-5">書籍詳細</h2>
+      <h4 class="ml-5 mt-5">書籍詳細</h4>
       <!--お気に入り追加リンク-->
       <% if @suggest_book.favorited_by?(current_user) %>
         <p class="m-3">
@@ -61,7 +61,7 @@
                 </div>
               </div>
               <% if post_comment.user == current_user %>
-                <%= link_to "削除する", suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete, class:"text-danger" %>
+                <%= link_to "削除する", suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete, class:"text-danger", data: {confirm: "コメントを削除しますか？"}  %>
               <% end %>
             </div>
           </div>

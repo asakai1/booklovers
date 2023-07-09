@@ -12,18 +12,18 @@
           <td><%= user.introduction %></td>
         </tr>
         <% if user == current_user %>
-        <tr>
-          <th>会員名</th>
-          <td><%= user.name %></td>
-        </tr>
-        <tr>
-          <th>メールアドレス</th>
-          <td><%= user.email %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td><%= link_to "編集する", edit_user_path(user.id) %></td>
-        </tr>
+          <tr>
+            <th>会員名</th>
+            <td><%= user.name %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= user.email %></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= link_to "編集する", edit_user_path(user.id) %></td>
+          </tr>
         <% end %>
       </tbody>
     </table>

@@ -70,16 +70,24 @@ Rails.application.routes.draw do
     patch 'users/:id' => 'users#update', as: 'update_user'
     resources :users, only: %i[show edit]
 
-    # 探す投稿の削除
+    # 探す投稿の編集・削除
+    patch 'find_books/:id' => 'find_books#update', as: 'update_find_book'
     delete 'find_books/:id' => 'find_books#destroy', as: 'destroy_find_book'
-    resources :find_books, only: %i[show index] do
+    resources :find_books, only: %i[show index edit] do
       # 情報提供機能
       resources :post_informations, only: [:destroy]
     end
 
-    # おすすめ投稿の削除
+    # 出品機能
+    resources :sell_books, only: [:destroy] do
+      # 購入機能
+      resource :buy_books, only: [:show]
+    end
+
+    # おすすめ投稿の編集・削除
+    patch 'suggest_books/:id' => 'suggest_books#update', as: 'update_suggest_book'
     delete 'suggest_books/:id' => 'suggest_books#destroy', as: 'destroy_suggest_book'
-    resources :suggest_books, only: %i[show index] do
+    resources :suggest_books, only: %i[show index edit] do
       # コメント機能
       resources :post_comments, only: [:destroy]
     end

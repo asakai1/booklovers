@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+      <p>おすすめの書籍の内容を変更します。</p>
+      <p>書籍の写真は投稿できません。</p>
+      <!--エラーメッセージ-->
+      <% if @suggest_book.errors.any? %>
+        <p class="text-danger"><%= @suggest_book.errors.count %>件のエラーが発生しました。</p>
+          <ul class="list-unstyled text-danger">
+            <% @suggest_book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      <% end %>
+      <%= form_with model: @suggest_book, url: admin_update_suggest_book_path, method: :patch do |f| %>
+        <h5 class="mt-3">書籍名</h5>
+        <%= f.text_field :title %>
+        <h5 class="mt-3">著者名</h5>
+        <%= f.text_field :author %>
+        <h5 class="mt-3">書籍の説明</h5>
+        <%= f.text_area :body %>
+        <h5 class="mt-3">ジャンル</h5>
+        <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name, { selected: @suggest_book.genre_id.to_i }) %></br>
+        <div class="mt-3">
+          <%= f.submit '投稿を更新する', class:"btn btn-outline-dark mr-3" %>
+          <%= link_to "削除する", admin_destroy_suggest_book_path(@suggest_book), method: :delete, data: {confirm: "本当に削除しますか？" }, class:"btn btn-outline-danger" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

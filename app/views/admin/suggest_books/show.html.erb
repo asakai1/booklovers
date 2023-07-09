@@ -1,21 +1,38 @@
+<%= flash[:notice] %>
 <div class="container">
   <div class="row">
-    <div class="mr-auto mt-5">
+    <div class="mr-auto">
+      <!--書籍の詳細情報-->
+      <h4 class="ml-5 mt-5">書籍詳細</h4>
       <p>
         ★<%= @suggest_book.favorites.count %>人のお気に入り
       </p>
-      <%= render 'public/users/book_page', book: @suggest_book, user: @suggest_book.user %>
+      <%= render 'public/users/book_page', book: @suggest_book %>
+      <div class="mt-3">
+        <%= link_to "編集する", edit_admin_suggest_book_path(@suggest_book), class:"btn btn-outline-dark" %>
+        <%= link_to "削除する", admin_destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "投稿を削除しますか？"}, class:"btn btn-outline-danger" %>
+      </div>
     </div>
-    <div class="col-md-7 ml-5">
-      <%= link_to "削除する", admin_destroy_suggest_book_path(@suggest_book), method: :delete, data: { confirm: "本当に削除しますか？"} %>
-      <div>
-        <p>コメント<%= @suggest_book.post_comments.count %>件</p>
+    <!--コメント一覧-->
+    <div class="ml-auto mt-5 col-md-7">
+      <p>コメント<%= @suggest_book.post_comments.count %>件</p>
+      <div class="d-flex flex-wrap mt-3">
         <% @suggest_book.post_comments.each do |post_comment| %>
-          <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-          <%= post_comment.user.name %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= post_comment.comment %>
-          <%= link_to "削除する", admin_suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete %>
+          <div class="card col-md-4">
+            <div class="card-body">
+              <p class="card-text"><%= post_comment.comment %></p>
+              <div class="row">
+                <div>
+                  <p><%= image_tag post_comment.user.get_profile_image(50,50) %></p>
+                </div>
+                <div>
+                  <p class="card-text"><%= link_to post_comment.user.name, user_path(post_comment.user) %></p>
+                  <p class="card-text"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+                </div>
+              </div>
+                <%= link_to "削除する", admin_suggest_book_post_comment_path(post_comment.suggest_book, post_comment), method: :delete, class:"text-danger", data: {confirm: "コメントを削除しますか？"} %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>

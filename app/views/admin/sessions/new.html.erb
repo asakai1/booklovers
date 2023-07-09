@@ -5,7 +5,7 @@
       <%= form_with model: @admin, url: admin_session_path do |f| %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class:"mt-3" %></br>
           <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"mt-3" %></br>
-          <%= f.submit "Log in", class:"btn btn-outline-dark mt-3" %></br>
+          <%= f.submit "ログイン", class:"btn btn-outline-dark mt-3" %></br>
       <% end %>
 
       <%= render "admin/shared/links" %>

@@ -43,7 +43,6 @@ class Public::SuggestBooksController < ApplicationController
     redirect_to suggest_books_path, notice: "おすすめの書籍の投稿を削除しました。"
   end
 
-
   private
 
   def suggest_book_params
