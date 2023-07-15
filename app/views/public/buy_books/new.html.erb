@@ -14,9 +14,9 @@
       <% end %>
       <%= form_with model: [@sell_book, @buy_book] do |f| %>
         <%= f.text_field :name, placeholder: "購入者氏名", class:"mt-3" %></br>
-        <%= f.text_field :postal_code, placeholder: "郵便番号", class:"mt-3" %></br>
+        <%= f.text_field :postal_code, placeholder: "郵便番号(ハイフンなし)", class:"mt-3" %></br>
         <%= f.text_field :address, placeholder: "住所", class:"mt-3" %></br>
-        <%= f.text_field :telephone_number, placeholder: "電話番号", class:"mt-3 mb-3" %></br>
+        <%= f.text_field :telephone_number, placeholder: "電話番(ハイフンなし)号", class:"mt-3 mb-3" %></br>
         <%= f.radio_button :payment_method, BuyBook.payment_methods.key(0), checked: true %>
         <%= f.label :payment_method_cash_on_delivery, BuyBook.payment_methods_i18n[:cash_on_delivery] %></br>
         <%= f.submit '購入を確定する', class:"btn btn-outline-dark mt-3" %>

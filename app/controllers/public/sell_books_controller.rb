@@ -7,6 +7,10 @@ class Public::SellBooksController < ApplicationController
     if sell_book.save
       redirect_to find_book_path(sell_book.find_book), notice: "出品に成功しました"
     else
+      @error_sell_book = sell_book
+      @find_book = sell_book.find_book
+      @post_information = PostInformation.new
+      @sell_book = SellBook.new
       render 'public/find_books/show'
     end
   end
@@ -19,7 +23,7 @@ class Public::SellBooksController < ApplicationController
   private
 
   def sell_book_params
-    params.require(:sell_book).permit(%i[find_book_id price shipping_date])
+    params.require(:sell_book).permit(%i[find_book_id condition price shipping_date])
   end
 
 end

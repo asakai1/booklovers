@@ -44,6 +44,7 @@
         <thead>
           <tr>
             <th>出品者</th>
+            <th>状態</th>
             <th>出品価格</th>
             <th>出品日</th>
             <th></th>
@@ -54,6 +55,7 @@
           <% @find_book.sell_books.each do |sell_book| %>
             <tr>
               <td><%= sell_book.user.name %></td>
+              <td><%= sell_book.condition %></td>
               <td>¥<%= sell_book.price.to_s(:delimited) %></td>
               <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
               <% if sell_book.bought?(sell_book) %>

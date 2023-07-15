@@ -5,8 +5,15 @@ class Public::PostInformationsController < ApplicationController
     find_book = FindBook.find(params[:find_book_id])
     information = current_user.post_informations.new(post_information_params)
     information.find_book_id = find_book.id
-    information.save
-    redirect_to find_book_path(find_book)
+    if information.save
+      redirect_to find_book_path(find_book)
+    else
+      @error_information = information
+      @find_book = FindBook.find(params[:find_book_id])
+      @post_information = PostInformation.new
+      @sell_book = SellBook.new
+      render 'public/find_books/show'
+    end
   end
 
   def destroy

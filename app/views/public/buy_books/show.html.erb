@@ -10,6 +10,10 @@
             <td><%= @sell_book.find_book.title %></td>
           </tr>
           <tr>
+            <th>状態</th>
+            <td><%= @sell_book.condition %></td>
+          </tr>
+          <tr>
             <th>価格</th>
             <td>¥<%= @sell_book.price.to_s(:delimited) %></td>
           </tr>

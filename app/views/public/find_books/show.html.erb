@@ -13,6 +13,13 @@
     </div>
     <div class="ml-auto mt-5 col-md-7">
         <p>目撃情報<%= @find_book.post_informations.count %>件</p>
+        <!--エラーメッセージ-->
+        <% if @error_information.present? %>
+          <p class="text-danger"><%= @error_information.errors.count %>件のエラーが発生しました。</p>
+            <ul class="list-unstyled text-danger">
+              <li><%= "目撃情報を入力してください。" %></li>
+            </ul>
+        <% end %>
         <div>
           <%= form_with model: [@find_book, @post_information] do |f| %>
             <%= f.text_area :information, row: '5', placeholder: "目撃情報はこちらへ", class:"mt-3" %></br>
@@ -45,11 +52,22 @@
   <div class="row">
     <div class="mr-auto mt-5">
       <h4>お持ちの書籍を出品する</h4>
+        <!--エラーメッセージ-->
+        <% if @error_sell_book.present? %>
+          <p class="text-danger"><%= @error_sell_book.errors.count %>件のエラーが発生しました。</p>
+            <ul class="list-unstyled text-danger">
+              <% @error_sell_book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+        <% end %>
       <%= form_with model: @sell_book do |f| %>
-        <p>・価格</p>
+        <%= f.label :condition, "・状態" %></br>
+        <%= f.text_field :condition, placeholder: "汚れあり等" %></br>
+        <%= f.label :price, "・価格" %></br>
         <p>¥<%= f.number_field :price, placeholder: "半角数字で入力" %></p>
-        <p>・発送可能日</p>
-        <p>購入確定から</p>
+        <%= f.label :shipping_date, "・発送可能日" %></br>
+        <%= "購入確定から" %>
         <p><%= f.number_field :shipping_date, placeholder: "半角数字で入力" %>日以内</p>
         <%= f.hidden_field :find_book_id, :value => @find_book.id %>
         <%= f.submit "出品する", class:"btn btn-outline-dark mt-3" %>
@@ -64,6 +82,7 @@
         <thead>
           <tr>
             <th>出品者</th>
+            <th>状態</th>
             <th>出品価格</th>
             <th>出品日</th>
             <th></th>
@@ -74,6 +93,7 @@
           <% @find_book.sell_books.each do |sell_book| %>
             <tr>
               <td><%= sell_book.user.name %></td>
+              <td><%= sell_book.condition %></td>
               <td>¥<%= sell_book.price.to_s(:delimited) %></td>
               <td><%= sell_book.created_at.strftime('%Y/%m/%d') %></td>
               <!--ユーザーが出品者の場合、削除リンクを表示する-->
