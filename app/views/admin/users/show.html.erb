@@ -64,7 +64,7 @@
       <table class="table mt-3">
         <% @post_comments.each do |post_comment| %>
           <tr>
-            <td><%= link_to post_comment.suggest_book.title, suggest_book_path(post_comment.suggest_book)  %></td>
+            <td><%= link_to post_comment.suggest_book.title, admin_suggest_book_path(post_comment.suggest_book)  %></td>
           </tr>
         <% end %>
       </table>
