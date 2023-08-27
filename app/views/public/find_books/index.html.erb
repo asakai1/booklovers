@@ -3,12 +3,16 @@
   <div class="row">
     <div class="mr-auto mt-5">
       <h4>ジャンルから探す</h4>
-        <% @genres.each do |genre| %>
-          <%= link_to genre.name, find_books_path(genre_id: genre.id), class:"btn btn-outline-dark p-2 m-1" %>
-        <% end %>
-      <h2 class="mt-5">探す投稿一覧</h2>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, find_books_path(genre_id: genre.id), class:"btn btn-outline-dark p-2 m-1" %>
+      <% end %>
+      <% if params[:genre_id] %>
+        <h2 class="mt-5">探す投稿(<%= @genre.name %>)一覧</h2>
+      <% else %>
+        <h2 class="mt-5">探す投稿一覧</h2>
+      <% end %>
       <p class="mt-3"><%= link_to "お探しの書籍を投稿する", new_find_book_path %></p>
-    <%= render 'public/users/index', books: @find_books %>
+      <%= render 'public/users/index', books: @find_books %>
     </div>
   </div>
 </div>

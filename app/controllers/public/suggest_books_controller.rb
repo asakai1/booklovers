@@ -21,7 +21,12 @@ class Public::SuggestBooksController < ApplicationController
 
   def index
     @genres = Genre.all
-    @suggest_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).suggest_books.page(params[:page]) : SuggestBook.page(params[:page])
+    if params[:genre_id]
+      @genre = @genres.find(params[:genre_id])
+      @suggest_books = @genre.suggest_books.page(params[:page])
+    else
+      @suggest_books = SuggestBook.page(params[:page])
+    end
   end
 
   def edit

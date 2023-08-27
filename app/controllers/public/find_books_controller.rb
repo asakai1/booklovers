@@ -17,7 +17,12 @@ class Public::FindBooksController < ApplicationController
 
   def index
     @genres = Genre.all
-    @find_books = params[:genre_id].present? ? Genre.find(params[:genre_id]).find_books.page(params[:page]) : FindBook.page(params[:page])
+    if params[:genre_id]
+      @genre = @genres.find(params[:genre_id])
+      @find_books = @genre.find_books.page(params[:page])
+    else
+      @find_books = FindBook.page(params[:page])
+    end
   end
 
   def show
