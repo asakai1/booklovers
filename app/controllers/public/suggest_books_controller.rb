@@ -38,7 +38,7 @@ class Public::SuggestBooksController < ApplicationController
   end
 
   def destroy
-    @suggest_book = SuggestBook.find(params[:id])
+    @suggest_book = current_user.suggest_books.find(params[:id])
     @suggest_book.destroy
     redirect_to suggest_books_path, notice: "おすすめの書籍の投稿を削除しました。"
   end

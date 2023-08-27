@@ -40,7 +40,7 @@ class Public::FindBooksController < ApplicationController
   end
 
   def destroy
-    @find_book = FindBook.find(params[:id])
+    @find_book = current_user.find_books.find(params[:id])
     @find_book.destroy
     redirect_to find_books_path, notice: "お探しの書籍の投稿を削除しました。"
   end
