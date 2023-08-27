@@ -1,11 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="mr-auto mt-5">
-      <h4>検索結果</h4>
       <% if @range == "FindBook" %>
-        <%= render 'public/users/index', books: @find_books %>
+        <h4>探す投稿「<%= @word %>」の検索結果</h4>
+        <% if @find_books.present? %>
+          <%= render 'public/users/index', books: @find_books %>
+        <% else %>
+          <h6>該当する書籍が見つかりませんでした</h6>
+        <% end %>
       <% else %>
-        <%= render 'public/users/index', books: @suggest_books %>
+        <h4>おすすめ投稿「<%= @word %>」の検索結果</h4>
+        <% if @suggest_books.present? %>
+          <%= render 'public/users/index', books: @suggest_books %>
+        <% else %>
+          <h6>該当する書籍が見つかりませんでした</h6>
+        <% end %>
       <% end %>
     </div>
   </div>
