@@ -17,7 +17,7 @@ class Public::PostInformationsController < ApplicationController
   end
 
   def destroy
-    PostInformation.find(params[:id]).destroy
+    current_user.post_informations.find(params[:id]).destroy
     redirect_to find_book_path(params[:find_book_id])
   end
 
