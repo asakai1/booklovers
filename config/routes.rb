@@ -64,8 +64,9 @@ Rails.application.routes.draw do
     delete 'gneres/:id/destroy' => 'genres#destroy', as: 'destroy_genre'
     resources :genres, only: %i[index create edit update]
 
-    # 会員の削除（削除フラグの切替）
+    # 会員の削除（会員ステータスの切替）
     patch 'users/:id/destroy' => 'users#destroy', as: 'destroy_user'
+    patch 'users/:id/activate' => 'users#activate', as: 'activate_user'
     # 会員情報の更新、prefix設定のためresourcesから外しました
     patch 'users/:id' => 'users#update', as: 'update_user'
     resources :users, only: %i[show edit]

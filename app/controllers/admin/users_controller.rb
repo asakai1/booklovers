@@ -22,6 +22,19 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  # 退会処理
+  def destroy
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    redirect_to admin_user_path(@user), notice: "会員を退会済みに変更しました"
+  end
+
+  def activate
+    @user = User.find(params[:id])
+    @user.update(is_deleted: false)
+    redirect_to admin_user_path(@user), notice: "会員を有効に変更しました"
+  end
+
   def user_params
     params.require(:user).permit(%i[name email introduction profile_image is_deleted])
   end
