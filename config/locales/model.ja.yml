@@ -19,11 +19,11 @@ ja:
       suggest_book:
         title: 書籍名
         author: 著者・作者
-        body: 紹介文
+        body: 書籍の説明
       find_book:
         title: 書籍名
         author: 著者・作者
-        body: 説明文
+        body: 書籍の説明
       sell_book:
         condition: 状態
         price: 価格
