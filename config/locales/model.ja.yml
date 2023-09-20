@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      users: ユーザー
+      suggest_books: おすすめ書籍
+      find_books: 探す書籍
+      sell_books: 書籍出品
+      buy_books: 書籍購入
+      post_informations: 目撃情報
+      post_comments: コメント
+      genres: ジャンル
+      favorites: お気に入り
+    attributes:
+      user:
+        name: 会員名
+        email: メールアドレス
+        encrypted_password: パスワード
+        introduction: 紹介文
+      suggest_book:
+        title: 書籍名
+        author: 著者・作者
+        body: 紹介文
+      find_book:
+        title: 書籍名
+        author: 著者・作者
+        body: 説明文
+      sell_book:
+        condition: 状態
+        price: 価格
+        shipping_date: 発送日
+      buy_book:
+        name: 購入者名
+        postal_code: 郵便番号
+        address: 住所
+        telephone_number: 電話番号
+        payment_method: 支払い方法
+      post_information:
+        information: 目撃情報
+      post_comment:
+        comment: コメント
+      genre:
+        name: ジャンル名
