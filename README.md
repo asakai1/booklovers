@@ -18,14 +18,14 @@
 ### 主な利用シーン
 - 絶版になった書籍や出版部数の少ない書籍、電子化されていない書籍を購入できる書店、サイトの情報を集めたい時
 - 書籍の情報を持っているユーザーが投稿したい時
-- 書籍を探しているユーザーに、持っているユーザーが譲渡した時
+- 書籍を探しているユーザーに、持っているユーザーが譲渡したい時
 - 好きな書籍を投稿して勧めたい時
 - 書籍選びに迷っていて情報を集めたい時
 
 https://docs.google.com/spreadsheets/d/1Jxm9X0PTeLmOoqHho06xKIg6VkTJhQJa6-BFx0xOUJY/edit?usp=sharing
 
 ## 設計書
-<...>
+https://docs.google.com/spreadsheets/d/1BNiqwsw4nj1UR5H2ZvSkldXUUEVDqnQ-nWfVOh6PCj4/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -35,7 +35,8 @@ https://docs.google.com/spreadsheets/d/1Jxm9X0PTeLmOoqHho06xKIg6VkTJhQJa6-BFx0xO
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中
+- いらすとや
+  https://www.irasutoya.com/
 
 ## 規約
 - 書籍画像の使用を行わない
