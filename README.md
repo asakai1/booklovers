@@ -29,9 +29,8 @@ https://docs.google.com/spreadsheets/d/1BNiqwsw4nj1UR5H2ZvSkldXUUEVDqnQ-nWfVOh6P
 
 ## 開発環境
 - OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
+- 言語：Ruby
+- フレームワーク：Ruby on Rails, Bootstrap
 - IDE：Cloud9
 
 ## 使用素材
